@@ -21,7 +21,7 @@ services:
 #      retries: 3
   devcode-api:
     container_name: devcode-api
-    image: devhub14/devcode-api
+    image: devhub14/devcode-api:latest
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/customer
     ports:
