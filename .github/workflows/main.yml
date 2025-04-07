@@ -27,7 +27,7 @@ jobs:
         run: git clone https://github.com/TirthMesariya/JDBC_And_Flyway.git
 
       - name: Log in to Docker Hub
-        run: echo "${{ secretsPASSWORD }}" | sudo docker login -u "${{ USERNAME }}" --password-stdin
+        run: echo "${{ PASSWORD }}" | sudo docker login -u "${{ USERNAME }}" --password-stdin
 
       - name: Build and run services using Docker Compose
         run: sudo docker compose -f JDBC_And_Flyway/docker-compose.yml up -d --build
