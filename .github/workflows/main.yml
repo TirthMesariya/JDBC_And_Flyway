@@ -26,7 +26,7 @@ jobs:
       - name: Clone Repository
         run: git clone https://github.com/TirthMesariya/JDBC_And_Flyway.git
 
-      - name: Log in to Docker Hub
+      - name: Log in to Docker Hub tirth
         run: echo "${{PASSWORD1}}" | sudo docker login -u "${{USERNAME1}}" --password-stdin
 
       - name: Build and run services using Docker Compose
