@@ -23,7 +23,7 @@ jobs:
           sudo usermod -aG docker $USER
           newgrp docker
 
-      - name: Clone Repository
+      - name: Clone Repository form
         run: git clone https://github.com/TirthMesariya/JDBC_And_Flyway.git
 
       - name: Log in to Docker Hub
