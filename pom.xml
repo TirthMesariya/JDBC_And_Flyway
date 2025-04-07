@@ -192,6 +192,10 @@
                         <tags>
                             <tag>latest</tag>
                         </tags>
+                             <auth>
+                                    <username>tirthmesariya</username>
+                                    <password>Tirth@1146</password>
+                             </auth>
                     </to>
                 </configuration>
                 <executions>
