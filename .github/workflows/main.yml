@@ -9,5 +9,4 @@ jobs:
        - name: Clone Repository
          run: git clone https://github.com/TirthMesariya/JDBC_And_Flyway.git
        - name: Build and run services using Docker Compose
-         run: docker compose up -d --build
-
+         run: docker compose -f docker-compose.yml up -d --build
