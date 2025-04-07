@@ -1,0 +1,41 @@
+services:
+  postgres:
+    container_name: jdbc-flyway-postgres-sql
+    image: postgres:alpine
+    environment:
+      POSTGRES_USER: "jay"
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_DB: "customer"
+      PGDATA: /data/postgres
+    ports:
+      - "1212:5432"
+    volumes:
+      - postgres:/data/postgres
+    networks:
+      - db-net
+    restart: unless-stopped
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U $POSTGRES_USER -d $POSTGRES_DB" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 3
+  devcode-api:
+    container_name: devcode-api
+    image: devhub14/devcode-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/customer
+    ports:
+      - "8088:8080"
+    networks:
+      - db-net
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  db-net:
+    driver: bridge
+
+volumes:
+  postgres:
+    name: jdbc_flyway
