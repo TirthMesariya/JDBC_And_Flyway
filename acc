@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'self-hosted' }  // Replace with your Jenkins node label if needed
+    agent { label 'test-java' }  // Replace with your Jenkins node label if needed
 
     environment {
         DOCKER_USERNAME = credentials('USERNAME1')  // Jenkins credentials ID
