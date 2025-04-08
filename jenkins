@@ -1,45 +1,28 @@
 pipeline {
-    agent { label 'test-java' }  // Replace with your Jenkins node label if needed
+    agent { label 'test-java' }
 
     environment {
-        DOCKER_USERNAME = credentials('USERNAME1')  // Jenkins credentials ID
-        DOCKER_PASSWORD = credentials('PASSWORD1')
+        DOCKER_CREDS = credentials('docker-hub-creds')
     }
 
     stages {
-        stage('Install Docker') {
-            steps {
-                sh '''
-                sudo apt-get update
-                sudo apt-get install -y \
-                    ca-certificates \
-                    curl \
-                    gnupg \
-                    lsb-release
-                sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-                sudo usermod -aG docker $USER
-                newgrp docker
-                '''
-            }
-        }
-
         stage('Clone Repository') {
             steps {
                 sh 'git clone https://github.com/TirthMesariya/JDBC_And_Flyway.git'
             }
         }
 
-        stage('Docker Hub Login') {
+        stage('Docker Login') {
             steps {
-                sh '''
-                echo "$DOCKER_PASSWORD" | sudo docker login -u "$DOCKER_USERNAME" --password-stdin
-                '''
+                sh """
+                echo \$DOCKER_CREDS_PSW | docker login -u \$DOCKER_CREDS_USR --password-stdin
+                """
             }
         }
 
         stage('Docker Compose Up') {
             steps {
-                sh 'sudo docker compose -f JDBC_And_Flyway/docker-compose.yml up -d --build'
+                sh 'docker compose -f JDBC_And_Flyway/docker-compose.yml up -d --build'
             }
         }
     }
